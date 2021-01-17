@@ -1,5 +1,4 @@
-from tkinter import Tk, Text, Button, END, re, font, W, Entry, Label
-
+from tkinter import Tk, Text, Button, END, re, font, W, Entry, Label, Frame, filedialog
 
 class Interfaz:
     def __init__(self):
@@ -11,14 +10,11 @@ class Interfaz:
         self.createAndPositionEntries()
         self.createAndPositionLabels()
 
-        T = Text(self.window, height = 23, width = 50) 
+        self.txt = Text(self.window, height = 23, width = 50) 
 
-        T.grid(row=5, column=1, sticky=W, pady=(30,5), padx=4) 
+        self.txt.grid(row=5, column=1, sticky=W, pady=(30,5), padx=4) 
 
         self.window.mainloop()
-
-
-        return
 
     def createAndPositionButtons(self):
         createDiretory = Button(self.window, text='Crear directorio',
@@ -30,14 +26,13 @@ class Interfaz:
         execFfs = Button(self.window, text='Crear archivos/directorios',
                          width=25, height=1, font=('mincho', 11))
         loadFile = Button(self.window, text='Cargar archivo',
-                          width=15, height=1, font=('mincho', 11))
+                          width=15, height=1, font=('mincho', 11), command=self.onOpen)
         buttons = [createDiretory, createFile, deleteFile]
 
         for i, val in enumerate(buttons):
             val.grid(row=i + 1, column=0, sticky=W, pady=4, padx=4)
         execFfs.grid(row=6, column=1, pady=4)
         loadFile.grid(row=7, column=2, pady=4)
-        return
 
     def createAndPositionEntries(self):
         for i in range(0,3):
@@ -45,7 +40,6 @@ class Interfaz:
             e.grid(row=i + 1, column=1, pady=4, padx=4)
         size = Entry(self.window, font=('mincho', 14))
         size.grid(row=2, column=2, pady=4, padx=4)
-        return 
 
     def createAndPositionLabels(self):
         action = Label(self.window, text = "Acción", font=('mincho', 11))
@@ -56,7 +50,22 @@ class Interfaz:
         for i, val in enumerate(labels):
             val.grid(row=0, column=i, pady=4, padx=4)
         infoLabel.grid(row=7, column=1, pady=4, padx=4)
-        return
 
+    def onOpen(self):
+        ftypes = [('Todos los archivos', '*')]
+        dlg = filedialog.Open(self.window, filetypes = ftypes)
+        fl = dlg.show()
+
+        if fl != '':
+            text = self.readFile(fl)
+            self.txt.insert(END, text)
+
+
+    def readFile(self, filename):
+
+        with open(filename, "r") as f:
+            text = f.read()
+
+        return text
 
 calculadora = Interfaz()
