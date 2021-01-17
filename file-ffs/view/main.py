@@ -1,4 +1,5 @@
 from tkinter import Tk, Text, Button, END, re, font, W, Entry, Label, Frame, filedialog
+import fileRepresentation as ventana_fileRepresentation
 
 class Interfaz:
     def __init__(self):
@@ -24,7 +25,7 @@ class Interfaz:
         deleteFile = Button(self.window, text='Eliminar Archivo',
                             width=15, height=1, font=('mincho', 11))
         execFfs = Button(self.window, text='Crear archivos/directorios',
-                         width=25, height=1, font=('mincho', 11))
+                         width=25, height=1, font=('mincho', 11), command=self.windowFileRepresentation)
         loadFile = Button(self.window, text='Cargar archivo',
                           width=15, height=1, font=('mincho', 11), command=self.onOpen)
         buttons = [createDiretory, createFile, deleteFile]
@@ -67,5 +68,9 @@ class Interfaz:
             text = f.read()
 
         return text
+
+    def windowFileRepresentation(self):
+        self.window.destroy()
+        ventana_fileRepresentation.Interfaz()
 
 calculadora = Interfaz()
