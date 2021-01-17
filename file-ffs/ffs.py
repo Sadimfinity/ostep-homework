@@ -582,8 +582,7 @@ class file_system:
             self.show_symbol_map = True
             
         if self.show_symbol_map == False:
-            print('')
-            return
+            return self
         
         print('\nsymbol  inode#  filename     filetype ', end='')
         if self.do_per_file_stats:
@@ -604,7 +603,7 @@ class file_system:
             else:
                 print('')
         print('')
-        return
+        return self
 
     def get_dist(self, a, b):
         if a > b:
@@ -787,7 +786,9 @@ fs = file_system(num_groups=options.num_groups,
 
 fs.read_input(options.input_file)
 
-fs.dump()
+res = fs.dump()
+
+print('The dump:', res)
 
 if options.show_spans:
     fs.do_all_spans()
