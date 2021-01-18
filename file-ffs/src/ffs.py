@@ -514,18 +514,15 @@ class file_system:
         return
 
     def dump(self):
-        print('')
-        print('num_groups:      ', self.num_groups)
-        print('inodes_per_group:', self.inodes_per_group)
-        print('blocks_per_group:', self.blocks_per_group)
-        print('')
-        print('free data blocks: %d (of %d)' % (self.total_data_free, (self.num_groups * self.blocks_per_group)))
-        print('free inodes:      %d (of %d)' % (self.total_inodes_free, (self.num_groups * self.inodes_per_group)))
-        print('')
-        print('spread inodes?   ', self.spread_inodes)
-        print('spread data?     ', self.spread_data_blocks)
-        print('contig alloc:    ', self.contig_allocation_policy)
-        print('')
+        print('"properties": {"num_groups":', self.num_groups)
+        print(',"inodes_per_group":', self.inodes_per_group)
+        print(',"blocks_per_group":', self.blocks_per_group)
+        print(',"free data blocks": "%d (of %d)"' % (self.total_data_free, (self.num_groups * self.blocks_per_group)))
+        print(',"free inodes": "%d (of %d)"' % (self.total_inodes_free, (self.num_groups * self.inodes_per_group)))
+        print(',"spread inodes":', self.spread_inodes)
+        print(',"spread data":', self.spread_data_blocks)
+        print(',"contig alloc":', self.contig_allocation_policy)
+        print('}, "data": "')
 
         inode_power = len('%s' % self.inodes_per_group) - 1
         data_power = len('%s' % self.blocks_per_group) - 1
@@ -536,20 +533,20 @@ class file_system:
             max_power = data_power
         
         while max_power >= 0:
-            print('     ', end='') # spacing before inode print out
+            #print('     ', end='') # spacing before inode print out
             if inode_power >= max_power:
                 self.do_numeric_header(max_power, self.inodes_per_group)
             else:
                 out_str = ' ' * self.inodes_per_group
-                print(out_str, end='')
+                #print(out_str, end='')
 
             if data_power >= max_power:
                 self.do_numeric_header(max_power, self.blocks_per_group)
             else:
                 out_str = ' ' * self.inodes_per_group
-                print(out_str, end='')
+                #print(out_str, end='')
 
-            print('')
+            #print('')
             max_power -= 1
 
         print('\ngroup %s' % ('inodes'[0:self.inodes_per_group]), end='')
@@ -715,9 +712,6 @@ class file_system:
         print('')
         return
 
-        
-    
-
 #
 # main program
 #
@@ -787,8 +781,6 @@ fs = file_system(num_groups=options.num_groups,
 fs.read_input(options.input_file)
 
 res = fs.dump()
-
-print('The dump:', res)
 
 if options.show_spans:
     fs.do_all_spans()
