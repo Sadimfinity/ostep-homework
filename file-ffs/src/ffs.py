@@ -701,7 +701,9 @@ class file_system:
             print('               avg  dirspan: %6s' % (dirspan_avg))
         else:
             print('               avg  dirspan: ?')
-        print(filespan_cnt + dirspan_cnt + 2)
+        if(filespan_cnt != 0 or dirspan_cnt != 0): print(filespan_cnt + dirspan_cnt + 1) 
+        else: print(filespan_cnt + dirspan_cnt + 2)
+
         return
 
 #

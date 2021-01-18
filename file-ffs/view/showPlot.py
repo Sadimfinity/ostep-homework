@@ -7,6 +7,7 @@ class Interfaz:
         self.window = Tk()
         self.n = self.n = int(data[-1].decode("utf-8"))
         self.data = data
+        for i in range(len(data)): print(data[i].decode("utf-8"))
         self.path = path
         # Inicializar la ventana con un título
         self.window.title('File Fast System')
@@ -31,11 +32,13 @@ class Interfaz:
                 name = dataSplit[1].decode("utf-8")
                 span = dataSplit[3].decode("utf-8")
             else:
+                print(dataSplit)
                 name = dataSplit[1].decode("utf-8")
                 name = 'Archivo' if name == 'filespan:' else 'Directorio' 
                 span = dataSplit[2].decode("utf-8")
             values = [typo, name,span]
             for j, val in enumerate(values):
+                print(i,j)
                 value = Label(self.window, text = val, font=('mincho', 11))
                 value.grid(row=i-8, column=j, pady=4, padx=4)
 
@@ -45,7 +48,7 @@ class Interfaz:
         buttonExit = Button(self.window, text='Salir',command=self.salir,
                          width=25, height=1, font=('mincho', 11))
 
-        buttonReturn.grid(column=1, row=self.n+2,  pady=10, padx=4)
+        buttonReturn.grid(column=0, row=self.n+2,  pady=10, padx=4)
         buttonExit.grid(column=2, row=self.n+2,  pady=10, padx=4)
 
 
