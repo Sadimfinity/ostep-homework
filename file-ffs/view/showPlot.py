@@ -3,7 +3,7 @@ import sys
 import fileRepresentation as ventana_fileRepresentation
 
 class Interfaz:
-    def __init__(self):
+    def __init__(self, path):
         self.window = Tk()
         # Inicializar la ventana con un título
         self.window.title('File Fast System')

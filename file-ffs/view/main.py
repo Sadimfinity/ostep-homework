@@ -112,9 +112,9 @@ class Interfaz:
     def execFFS(self):
         self.writeFile()
         b = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c', shell=True, stdout=subprocess.PIPE).stdout.readlines()
-        print(b)
+        print(b[1])
         self.window.destroy()
-        ventana_fileRepresentation.Interfaz()
+        ventana_fileRepresentation.Interfaz(b, self.path)
 
     def writeFile(self):
         if self.path == '':
