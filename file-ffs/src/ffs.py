@@ -578,7 +578,7 @@ class file_system:
             
         if self.show_symbol_map == False:
             return self
-        
+        print(len(self.name_to_inode_map))
         print('\nsymbol  inode#  filename     filetype ', end='')
         if self.do_per_file_stats:
             print('  block_addresses')
@@ -597,7 +597,6 @@ class file_system:
                 print('')
             else:
                 print('')
-        print(len(self.name_to_inode_map))
         return self
 
     def get_dist(self, a, b):
@@ -636,7 +635,6 @@ class file_system:
         min_group = 1e6
         max_group = -1
     
-        print('span: files')
         span_results = {}
         filespan_sum = 0
         filespan_cnt = 0
@@ -671,8 +669,6 @@ class file_system:
             else:
                 print('               avg  filespan: ?')
             
-
-        print('\nspan: directories')
         dirspan_sum = 0
         dirspan_cnt = 0
         for f in self.name_to_inode_map:
@@ -705,9 +701,7 @@ class file_system:
             print('               avg  dirspan: %6s' % (dirspan_avg))
         else:
             print('               avg  dirspan: ?')
-
-
-        print('')
+        print(filespan_cnt + dirspan_cnt + 2)
         return
 
 #

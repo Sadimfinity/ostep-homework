@@ -8,7 +8,7 @@ class Interfaz:
     def __init__(self, data, path):
         self.window = Tk()
         self.data = data
-        self.n = int(data[19].decode("utf-8"))
+        self.n = int(data[10].decode("utf-8"))
         self.path = path
         # Inicializar la ventana con un título
         self.window.title("Mostrar mapa de símbolos")
@@ -32,7 +32,7 @@ class Interfaz:
             value = Label(self.window, text = val, font=('mincho', 11))
             value.grid(row=0, column=i, pady=4, padx=4)
 
-        for i in range (12, 12+self.n):
+        for i in range (13, 13+self.n):
             dataSplit = self.data[i].split()
             symbol = dataSplit[0].decode("utf-8")
             inode = dataSplit[1].decode("utf-8")
