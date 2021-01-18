@@ -510,7 +510,7 @@ class file_system:
             if counter == power:
                 value += 1
                 counter = 0
-        print(out_str, end='')
+        #print(out_str, end='')
         return
 
     def dump(self):
@@ -549,7 +549,7 @@ class file_system:
             max_power -= 1
 
         #print('\ngroup %s' % ('inodes'[0:self.inodes_per_group]), end='')
-        print(' ')
+        #print(' ')
         out_str = ''
         for i in range(self.inodes_per_group - len('inodes')):
             out_str += ' '
@@ -597,7 +597,7 @@ class file_system:
                 print('')
             else:
                 print('')
-        print('')
+        print(len(self.name_to_inode_map))
         return self
 
     def get_dist(self, a, b):

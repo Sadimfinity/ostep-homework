@@ -3,8 +3,10 @@ import sys
 import fileRepresentation as ventana_fileRepresentation
 
 class Interfaz:
-    def __init__(self, path):
+    def __init__(self, data, path):
         self.window = Tk()
+        self.data = data
+        self.path = path
         # Inicializar la ventana con un título
         self.window.title('File Fast System')
         self.window.geometry('840x500') 
@@ -48,7 +50,7 @@ class Interfaz:
 
     def regresar(self):
         self.window.destroy()
-        ventana_fileRepresentation.Interfaz().window.deiconify()
+        ventana_fileRepresentation.Interfaz(data, path).window.deiconify()
 
     def salir(self):
         sys.exit(0)
