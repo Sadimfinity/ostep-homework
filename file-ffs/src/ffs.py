@@ -510,19 +510,18 @@ class file_system:
             if counter == power:
                 value += 1
                 counter = 0
-        print(out_str, end='')
+        #print(out_str, end='')
         return
 
     def dump(self):
-        print('"properties": {"num_groups":', self.num_groups)
-        print(',"inodes_per_group":', self.inodes_per_group)
-        print(',"blocks_per_group":', self.blocks_per_group)
-        print(',"free data blocks": "%d (of %d)"' % (self.total_data_free, (self.num_groups * self.blocks_per_group)))
-        print(',"free inodes": "%d (of %d)"' % (self.total_inodes_free, (self.num_groups * self.inodes_per_group)))
-        print(',"spread inodes":', self.spread_inodes)
-        print(',"spread data":', self.spread_data_blocks)
-        print(',"contig alloc":', self.contig_allocation_policy)
-        print('}, "data": "')
+        # print('num_groups:', self.num_groups)
+        # print('inodes_per_group:', self.inodes_per_group)
+        # print('blocks_per_group:', self.blocks_per_group)
+        # print('free data blocks: %d (of %d)' % (self.total_data_free, (self.num_groups * self.blocks_per_group)))
+        # print('free inodes:      %d (of %d)' % (self.total_inodes_free, (self.num_groups * self.inodes_per_group)))
+        # print('spread inodes:', self.spread_inodes)
+        # print('spread data":', self.spread_data_blocks)
+        # print('contig alloc":', self.contig_allocation_policy)
 
         inode_power = len('%s' % self.inodes_per_group) - 1
         data_power = len('%s' % self.blocks_per_group) - 1
@@ -549,12 +548,11 @@ class file_system:
             #print('')
             max_power -= 1
 
-        print('\ngroup %s' % ('inodes'[0:self.inodes_per_group]), end='')
+        #print('\ngroup %s' % ('inodes'[0:self.inodes_per_group]), end='')
+        #print(' ')
         out_str = ''
         for i in range(self.inodes_per_group - len('inodes')):
             out_str += ' '
-        print('%sdata' % out_str)
-
         count = 0
 
         for i in range(self.num_groups):
@@ -580,7 +578,7 @@ class file_system:
             
         if self.show_symbol_map == False:
             return self
-        
+        print(len(self.name_to_inode_map))
         print('\nsymbol  inode#  filename     filetype ', end='')
         if self.do_per_file_stats:
             print('  block_addresses')
@@ -599,7 +597,6 @@ class file_system:
                 print('')
             else:
                 print('')
-        print('')
         return self
 
     def get_dist(self, a, b):
@@ -638,7 +635,6 @@ class file_system:
         min_group = 1e6
         max_group = -1
     
-        print('span: files')
         span_results = {}
         filespan_sum = 0
         filespan_cnt = 0
@@ -673,8 +669,6 @@ class file_system:
             else:
                 print('               avg  filespan: ?')
             
-
-        print('\nspan: directories')
         dirspan_sum = 0
         dirspan_cnt = 0
         for f in self.name_to_inode_map:
@@ -707,9 +701,9 @@ class file_system:
             print('               avg  dirspan: %6s' % (dirspan_avg))
         else:
             print('               avg  dirspan: ?')
+        if(filespan_cnt != 0 or dirspan_cnt != 0): print(filespan_cnt + dirspan_cnt + 1) 
+        else: print(filespan_cnt + dirspan_cnt + 2)
 
-
-        print('')
         return
 
 #

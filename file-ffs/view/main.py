@@ -1,6 +1,6 @@
 import subprocess
 import os
-from tkinter import Tk, Text, Button, END, re, font, W, Entry, Label, Frame, filedialog
+from tkinter import Tk, Text, Button, END, re, font, W, Entry, Label, Frame, filedialog, messagebox
 import fileRepresentation as ventana_fileRepresentation
 
 class Interfaz:
@@ -45,16 +45,15 @@ class Interfaz:
             self.entries[0].delete(0, END)
 
     def createFile(self):
-        if self.verifyNatural():
+        if self.entries[1].get() != '' and self.entries[3].get().isdigit():
             self.txt.configure(state='normal')
             self.txt.insert(END, 'file ' + self.entries[1].get() + ' '+ self.entries[3].get()  +'\n')
             self.txt.configure(state='disabled')
+        else:
+            self.onError()
         self.entries[1].delete(0, END)
         self.entries[3].delete(0, END)
 
-
-    def verifyNatural(self):
-        return self.entries[1].get() != '' and self.entries[3].get().isdigit()
 
     def deleteFile(self):
         if self.entries[2].get() != '':
@@ -111,10 +110,12 @@ class Interfaz:
 
     def execFFS(self):
         self.writeFile()
-        b = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c', shell=True, stdout=subprocess.PIPE).stdout.readlines()
-        print(b)
+        data = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c', shell=True, stdout=subprocess.PIPE).stdout.readlines()
         self.window.destroy()
-        ventana_fileRepresentation.Interfaz()
+        ventana_fileRepresentation.Interfaz(data, self.path)
+
+    def onError(self):
+        messagebox.showerror("Error", "El tamaño no está permitido, ingrese un número natural")
 
     def writeFile(self):
         if self.path == '':
