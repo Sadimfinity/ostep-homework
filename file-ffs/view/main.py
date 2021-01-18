@@ -112,7 +112,6 @@ class Interfaz:
         self.writeFile()
         data = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c', shell=True, stdout=subprocess.PIPE).stdout.readlines()
         self.window.destroy()
-        print(data)
         ventana_fileRepresentation.Interfaz(data, self.path)
 
     def onError(self):
