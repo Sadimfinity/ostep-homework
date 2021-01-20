@@ -1,6 +1,7 @@
 from tkinter import Tk, Text, Button, END, re, font, W, Entry, Label, ttk
 import symbolMap as ventana_symbolMap
 import showPlot as ventana_showPlot
+import main as ventana_main
 import sys
 import subprocess
 
@@ -10,10 +11,8 @@ class Interfaz:
         self.path = path
         self.window = Tk()
         # Inicializar la ventana con un título
-        self.window.title("Representación de Archivos con File Fast System")
-        #self.window.geometry("1000x800") 
+        self.window.title('Representación de Archivos con File Fast System')
         self.createAndPositionButtons()
-        #self.createAndPositionEntries()
         self.createAndPositionLabels()
 
         self.window.mainloop()
@@ -22,22 +21,20 @@ class Interfaz:
         return
 
     def createAndPositionButtons(self):
-
         showFileFrame = Button(self.window, text='Mostrar trama de archivos y directorios',command=self.windowShowPlot,
                          width=38, height=1, font=('mincho', 11))
         showSymbolMap = Button(self.window, text='Mostrar mapa de símbolos',command=self.windowShowMap,
                          width=25, height=1, font=('mincho', 11))
-
+        showMain = Button(self.window, text='Generar/Cargar otro archivo',command=self.backToMain,
+                         width=28, height=1, font=('mincho', 11))
         showFileFrame.grid(column=1, row=11,  pady=10, padx=4)
         showSymbolMap.grid(column=1, row=12,  pady=10, padx=4)
-
-        return
-
+        showMain.grid(column=2, row=12, pady=10, padx=4)
 
     def createAndPositionLabels(self):
         labels = ['Cilindros', 'Inodos', 'Data']
         for i, val in enumerate(labels):
-            value = Label(self.window, text = val, font=('mincho', 11))
+            value = Label(self.window, text = val, font=('mincho', 12))
             value.grid(row=0, column=i, pady=4, padx=4)
 
         for i in range(0,10):
@@ -46,8 +43,8 @@ class Interfaz:
 
         for i in range (0, 10):
             dataSplit = self.data[i].split()
-            inodes = dataSplit[1].decode("utf-8") 
-            dataGroup = dataSplit[2].decode("utf-8")  + ' ' + dataSplit[3].decode("utf-8")  + ' ' + dataSplit[4].decode("utf-8") 
+            inodes = dataSplit[1].decode('utf-8') 
+            dataGroup = dataSplit[2].decode('utf-8')  + ' ' + dataSplit[3].decode('utf-8')  + ' ' + dataSplit[4].decode('utf-8') 
             values = [inodes, dataGroup]
             for j, val in enumerate(values):
                 value = Label(self.window, text = val, font=('mincho', 11))
@@ -58,8 +55,11 @@ class Interfaz:
         data = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c -M', shell=True, stdout=subprocess.PIPE).stdout.readlines()
         ventana_symbolMap.Interfaz(data, self.path)
 
+    def backToMain(self):
+        self.window.destroy()
+        ventana_main.Interfaz()
+
     def windowShowPlot(self):
         self.window.destroy()
         data = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c -T', shell=True, stdout=subprocess.PIPE).stdout.readlines()
         ventana_showPlot.Interfaz(data, self.path)
-    
