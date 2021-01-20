@@ -8,7 +8,7 @@ archivos y escenarios de creación.
 La herramienta usa Tkinter para desplegar un entorno virtual donde poder cargar y generar archivos,
 para usarlo, necesitarás correr la vista principal así:
 
-Una vez hayas clonado el repositorio has
+Una vez hayas clonado el repositorio has:
 
 ```sh
 cd /ostep-homework/file-ffs
@@ -18,7 +18,8 @@ python3 ./view/main.py
 El proyecto también cuenta con algunos archivos de ejemplo para probar el funcionamiento del 
 simulador.
 
-Por ejemplo el archivo  `in.example1` consiste de los siguientes comandos:
+Por ejemplo el archivo  `in.example1` ubicado en la carpeta `assets` consiste de los siguientes 
+comandos:
 
 ```sh
 dir /a
