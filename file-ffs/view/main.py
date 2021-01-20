@@ -8,7 +8,7 @@ class Interfaz:
         self.window = Tk()
         # Inicializar la ventana con un título
         self.window.title('File Fast System')
-        self.window.geometry('840x500') 
+        self.window.geometry('854x680')
         self.createAndPositionButtons()
         self.entries = self.createAndPositionEntries()
         self.createAndPositionLabels()
@@ -33,7 +33,7 @@ class Interfaz:
         buttons = [createDiretory, createFile, deleteFile]
 
         for i, val in enumerate(buttons):
-            val.grid(row=i + 1, column=0, sticky=W, pady=4, padx=4)
+            val.grid(row=i + 1, column=0, sticky=W, pady=4, padx=(12,4))
         execFfs.grid(row=6, column=1, pady=4)
         loadFile.grid(row=7, column=2, pady=4)
 
@@ -74,9 +74,9 @@ class Interfaz:
         return entries
 
     def createAndPositionLabels(self):
-        action = Label(self.window, text = 'Acción', font=('mincho', 11))
-        name = Label(self.window, text = 'Nombre', font=('mincho', 11)) 
-        size = Label(self.window, text = 'Tamaño', font=('mincho', 11))
+        action = Label(self.window, text = 'Acción', font=('mincho', 12))
+        name = Label(self.window, text = 'Nombre', font=('mincho', 12)) 
+        size = Label(self.window, text = 'Tamaño', font=('mincho', 12))
         infoLabel = Label(self.window, text = 'En caso de tener el txt listo, puede cargar el archivo')
         labels = [action, name, size] 
         for i, val in enumerate(labels):
@@ -115,7 +115,7 @@ class Interfaz:
         ventana_fileRepresentation.Interfaz(data, self.path)
 
     def onError(self):
-        messagebox.showerror("Error", "El tamaño no está permitido, ingrese un número natural")
+        messagebox.showerror('Error', 'El tamaño no está permitido, ingrese un número natural')
 
     def writeFile(self):
         if self.path == '':
@@ -125,4 +125,6 @@ class Interfaz:
             f.close()
             self.path = path
 
-calculadora = Interfaz()
+
+if __name__ == "__main__":
+    ffs = Interfaz()

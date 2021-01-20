@@ -5,8 +5,9 @@ import fileRepresentation as ventana_fileRepresentation
 class Interfaz:
     def __init__(self, data, path):
         self.window = Tk()
-        self.n = self.n = int(data[-1].decode("utf-8"))
+        self.n = self.n = int(data[-1].decode('utf-8'))
         self.data = data
+        for i in data: print(i.decode('utf-8'))
         self.path = path
         # Inicializar la ventana con un título
         self.window.title('File Fast System')
@@ -17,23 +18,25 @@ class Interfaz:
     def createAndPositionLabels(self):
         titles = ['Tipo', 'Nombre', 'Span']
         for i, val in enumerate(titles):
-            value = Label(self.window, text = val, font=('mincho', 11))
+            value = Label(self.window, text = val, font=('mincho', 12))
             value.grid(row=0, column=i, pady=4, padx=4)
 
-        for i in range (10, 10+self.n):
+        total = self.n if self.n == 2 else self.n + 1
+
+        for i in range (10, 10+total):
             values = []
             dataSplit = self.data[i].split()
-            typo = dataSplit[0].decode("utf-8")
+            typo = dataSplit[0].decode('utf-8')
             if(typo == 'file:'): typo = 'Archivo' 
             elif (typo == 'dir:'): typo = 'Directorio' 
             else: typo = 'Promedio'
             if(typo != 'Promedio'):
-                name = dataSplit[1].decode("utf-8")
-                span = dataSplit[3].decode("utf-8")
+                name = dataSplit[1].decode('utf-8')
+                span = dataSplit[3].decode('utf-8')
             else:
-                name = dataSplit[1].decode("utf-8")
+                name = dataSplit[1].decode('utf-8')
                 name = 'Archivo' if name == 'filespan:' else 'Directorio' 
-                span = dataSplit[2].decode("utf-8")
+                span = dataSplit[2].decode('utf-8')
             values = [typo, name,span]
             for j, val in enumerate(values):
                 value = Label(self.window, text = val, font=('mincho', 11))
@@ -45,8 +48,8 @@ class Interfaz:
         buttonExit = Button(self.window, text='Salir',command=self.salir,
                          width=25, height=1, font=('mincho', 11))
 
-        buttonReturn.grid(column=0, row=self.n+2,  pady=10, padx=4)
-        buttonExit.grid(column=2, row=self.n+2,  pady=10, padx=4)
+        buttonReturn.grid(column=0, row=self.n+3,  pady=10, padx=4)
+        buttonExit.grid(column=2, row=self.n+3,  pady=10, padx=4)
 
 
     def regresar(self):
