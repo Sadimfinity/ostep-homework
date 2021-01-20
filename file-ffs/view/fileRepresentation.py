@@ -4,6 +4,7 @@ import showPlot as ventana_showPlot
 import main as ventana_main
 import sys
 import subprocess
+import pathlib
 
 class Interfaz:
     def __init__(self, data, path):
@@ -52,7 +53,7 @@ class Interfaz:
 
     def windowShowMap(self):
         self.window.destroy()
-        data = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c -M', shell=True, stdout=subprocess.PIPE).stdout.readlines()
+        data = subprocess.Popen('./src/ffs.py -f ' + self.path + ' -c -M', shell=True, stdout=subprocess.PIPE).stdout.readlines()
         ventana_symbolMap.Interfaz(data, self.path)
 
     def backToMain(self):
@@ -61,5 +62,5 @@ class Interfaz:
 
     def windowShowPlot(self):
         self.window.destroy()
-        data = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c -T', shell=True, stdout=subprocess.PIPE).stdout.readlines()
+        data = subprocess.Popen('./src/ffs.py -f ' + self.path + ' -c -T', shell=True, stdout=subprocess.PIPE).stdout.readlines()
         ventana_showPlot.Interfaz(data, self.path)

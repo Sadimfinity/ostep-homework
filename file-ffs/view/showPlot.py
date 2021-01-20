@@ -7,7 +7,6 @@ class Interfaz:
         self.window = Tk()
         self.n = self.n = int(data[-1].decode('utf-8'))
         self.data = data
-        for i in data: print(i.decode('utf-8'))
         self.path = path
         # Inicializar la ventana con un título
         self.window.title('File Fast System')

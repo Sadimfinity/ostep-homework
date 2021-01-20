@@ -110,7 +110,7 @@ class Interfaz:
 
     def execFFS(self):
         self.writeFile()
-        data = subprocess.Popen('../src/ffs.py -f ' + self.path + ' -c', shell=True, stdout=subprocess.PIPE).stdout.readlines()
+        data = subprocess.Popen('./src/ffs.py -f ' + self.path + ' -c', shell=True, stdout=subprocess.PIPE).stdout.readlines()
         self.window.destroy()
         ventana_fileRepresentation.Interfaz(data, self.path)
 
@@ -119,7 +119,7 @@ class Interfaz:
 
     def writeFile(self):
         if self.path == '':
-            path = '../assets/input_user_file'
+            path = './assets/input_user_file'
             f = open(path, 'w+')
             f.write(self.txt.get('1.0', END))
             f.close()
